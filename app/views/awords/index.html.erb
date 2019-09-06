@@ -1,0 +1,4 @@
+<%= form_for :awords, url:awords_path do |f| %>
+  <%= f.text_fiend(:repo_name, @default_repo) %>
+  <%= submit_tag("Search") %>
+<% end %>
