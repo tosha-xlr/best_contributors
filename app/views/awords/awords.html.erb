@@ -1,8 +1,8 @@
-<%= form_for :awords, url:awords_path do |f| %>
-  <%= f.text_fiend(:repo_name, params[:repo_name]) %>
+<%= form_for :repo, url:awords_path, method: :get do |f| %>
+  <%= f.text_field(:repo_name, value:@repo_name) %>
   <%= submit_tag("Search") %>
 <% end %>
 <h1>Results</h1>
   <p>
-    under construction
+    <a href='<%= @repo_api_name %>'>get JSON</a>
   </p>
