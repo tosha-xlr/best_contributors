@@ -1,4 +1,4 @@
-<%= form_for :repo, url:awords_path, method: :get do |f| %>
+<%= form_for :repo, url:awords_path do |f| %>
   <%= f.text_field(:repo_name, value:@default_repo) %><br>
   <%= submit_tag("Search") %>
 <% end %>
