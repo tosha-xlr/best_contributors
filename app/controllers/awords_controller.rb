@@ -17,25 +17,25 @@ class AwordsController < ApplicationController
         @result = JSON.load(resp.body).map{|x|x["login"]} rescue []
       end
       format.zip do
-        # filename = 'awords.zip'
-        # temp_file = Tempfile.new(filename)
+        filename = 'awords.zip'
+        temp_file = Tempfile.new(filename)
 
-        # begin
-        #   Zip::OutputStream.open(temp_file) do |zos|
-        #     params[:persons].each_with_index do |person, i|
-        #       zos.put_next_entry "aword #{i+1} #{person}.pdf"
-        #       zos << get_aword_pdf(person, i+1).render
-        #     end
-        #   end
-        #   zip_data = File.read(temp_file.path)
-        #   send_data zip_data,
-        #     filename:Time.now.strftime("awords %d-%m-%y [%T].zip"),
-        #     type:'application/zip',
-        #     disposition:'attachment'
-        # ensure
-        #   temp_file.close
-        #   temp_file.unlink
-        # end
+        begin
+          Zip::OutputStream.open(temp_file) do |zos|
+            params[:persons].each_with_index do |person, i|
+              zos.put_next_entry "aword #{i+1} #{person}.pdf"
+              zos << get_aword_pdf(person, i+1).render
+            end
+          end
+          zip_data = File.read(temp_file.path)
+          send_data zip_data,
+            filename:Time.now.strftime("awords %d-%m-%y [%T].zip"),
+            type:'application/zip',
+            disposition:'attachment'
+        ensure
+          temp_file.close
+          temp_file.unlink
+        end
       end
     end
   end
